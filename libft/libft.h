@@ -6,7 +6,7 @@
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 09:38:52 by kpuwar            #+#    #+#             */
-/*   Updated: 2022/12/29 12:14:15 by kpuwar           ###   ########.fr       */
+/*   Updated: 2023/01/03 12:48:19 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
-typedef int		t_bool;
+typedef char	t_bool;
 # define TRUE 1
 # define FALSE 0
 
