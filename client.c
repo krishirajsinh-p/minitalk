@@ -6,7 +6,7 @@
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:48:58 by kpuwar            #+#    #+#             */
-/*   Updated: 2023/01/03 17:09:03 by kpuwar           ###   ########.fr       */
+/*   Updated: 2023/01/04 08:06:31 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 unsigned char	g_bits[8];
 
-static void print_ack(int sig)
+static void	print_ack(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("This is an acknowledgement message, server recieved the message!\n");
+	{
+		ft_printf("This is an acknowledgement message,");
+		ft_printf(" server recieved the message!\n");
+	}
 }
 
 static t_bool	error(int argc, int spid)
@@ -47,17 +50,24 @@ static void	send_bits(pid_t pid)
 	}
 }
 
-static void	char2bits(unsigned char c, pid_t pid)
+static void	str2bits(t_string s, pid_t pid)
 {
-	short	i;
+	short			i;
+	short			j;
+	unsigned char	c;
 
-	i = 8;
-	while (i--)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		g_bits[i] = (c % 2) + '0';
-		c /= 2;
+		c = s[i++];
+		j = 8;
+		while (j--)
+		{
+			g_bits[j] = (c % 2) + '0';
+			c /= 2;
+		}
+		send_bits(pid);
 	}
-	send_bits(pid);
 }
 
 int	main(const int argc, const t_string argv[])
@@ -65,7 +75,6 @@ int	main(const int argc, const t_string argv[])
 	pid_t		spid;
 	t_string	msg;
 	t_string	cpid;
-	short		i;
 
 	signal(SIGUSR1, print_ack);
 	spid = ft_atoi(argv[1]);
@@ -73,15 +82,10 @@ int	main(const int argc, const t_string argv[])
 		exit(EXIT_FAILURE);
 	msg = argv[2];
 	cpid = ft_itoa(getpid());
-	i = 0;
-	while (cpid[i] != '\0')
-		char2bits(cpid[i++], spid);
+	str2bits(cpid, spid);
 	free(cpid);
-	char2bits(':', spid);
-	char2bits('\t', spid);
-	i = 0;
-	while (msg[i] != '\0')
-		char2bits(msg[i++], spid);
-	char2bits('\n', spid);
+	str2bits(": \t", spid);
+	str2bits(msg, spid);
+	str2bits("\n", spid);
 	exit(EXIT_SUCCESS);
 }
