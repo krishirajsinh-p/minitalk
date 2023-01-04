@@ -6,7 +6,7 @@
 #    By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 23:03:36 by kpuwar            #+#    #+#              #
-#    Updated: 2022/12/26 23:44:50 by kpuwar           ###   ########.fr        #
+#    Updated: 2023/01/04 07:38:27 by kpuwar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,29 +14,35 @@ NAME = minitalk
 
 SRCS = server.c client.c
 
-OBJS = $(SRCS:.c=)
+EXES = $(SRCS:.c=)
 
 CC = cc
 
 CC_FLAGS = -Wall -Wextra -Werror
 
-IN_LIBFT = cd libft && make
+RM = rm -f
 
-% : %.c minitalk.h
-	$(IN_LIBFT) all
-	$(CC) $(CC_FLAGS) -c $< libft/libft.a -o $@
+LIB = libft/libft.a
 
-$(NAME): $(OBJS)
+%: %.c minitalk.h
+	$(CC) $(CC_FLAGS) $< $(LIB) -o $@
 
-all: $(NAME)
+all: 
+	make libft
+	make minitalk
 
-clean:
-	rm -f $(OBJS)
-	$(IN_LIBFT) clean
+libft: 
+	make -C libft
+
+$(NAME): $(EXES)
+
+clean: 
+	$(RM) $(EXES)
+	make clean -C libft
 
 fclean: clean
-	$(IN_LIBFT) fclean
+	$(RM) $(LIB)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: libft minitalk all clean fclean re
