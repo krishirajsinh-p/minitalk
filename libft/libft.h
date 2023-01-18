@@ -6,7 +6,7 @@
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 09:38:52 by kpuwar            #+#    #+#             */
-/*   Updated: 2023/01/03 12:48:19 by kpuwar           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:34:03 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
-
-typedef char	t_bool;
-# define TRUE 1
-# define FALSE 0
 
 typedef char *	t_string;
 
