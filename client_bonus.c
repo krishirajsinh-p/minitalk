@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 23:48:58 by kpuwar            #+#    #+#             */
-/*   Updated: 2023/01/18 13:32:07 by kpuwar           ###   ########.fr       */
+/*   Created: 2023/01/18 13:26:07 by kpuwar            #+#    #+#             */
+/*   Updated: 2023/01/18 13:41:30 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 unsigned char	g_bits[8];
+
+static void	print_ack(int sig)
+{
+	if (sig == SIGUSR1)
+	{
+		ft_printf("This is an acknowledgement message,");
+		ft_printf(" server has recieved the message!\n");
+	}
+}
 
 static bool	error(int argc, int spid)
 {
@@ -67,6 +76,7 @@ int	main(const int argc, const t_string argv[])
 	t_string	msg;
 	t_string	cpid;
 
+	signal(SIGUSR1, print_ack);
 	spid = ft_atoi(argv[1]);
 	if (error(argc, spid) == true)
 		exit(EXIT_FAILURE);
@@ -79,3 +89,7 @@ int	main(const int argc, const t_string argv[])
 	str2bits("\n", spid);
 	exit(EXIT_SUCCESS);
 }
+
+/*
+send extra bit to state start of msg, end of pid & end of msg
+*/

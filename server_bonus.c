@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 23:48:47 by kpuwar            #+#    #+#             */
-/*   Updated: 2023/01/18 13:31:02 by kpuwar           ###   ########.fr       */
+/*   Created: 2023/01/18 13:26:10 by kpuwar            #+#    #+#             */
+/*   Updated: 2023/01/18 13:42:19 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 unsigned char	g_bits[8];
 
@@ -53,3 +53,7 @@ int	main(void)
 		pause();
 	exit(EXIT_SUCCESS);
 }
+
+/*
+check if extra bit, if so then send acknowledgement
+*/
