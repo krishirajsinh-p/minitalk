@@ -6,7 +6,7 @@
 /*   By: kpuwar <kpuwar@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:26:07 by kpuwar            #+#    #+#             */
-/*   Updated: 2023/01/18 13:41:30 by kpuwar           ###   ########.fr       */
+/*   Updated: 2023/01/26 13:45:12 by kpuwar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ int	main(const int argc, const t_string argv[])
 	str2bits(": \t", spid);
 	str2bits(msg, spid);
 	str2bits("\n", spid);
+	ft_memset(g_bits, '0', 8);
+	send_bits(spid);
+	usleep(25);
 	exit(EXIT_SUCCESS);
 }
-
-/*
-send extra bit to state start of msg, end of pid & end of msg
-*/
